@@ -7,7 +7,7 @@ const NavBAr = () => {
 
     return (
         <>
-            <div className="flex items-center justify-around flex-wrap w-full border-2 bg-Primary p-4">
+            <div className="flex items-center justify-around flex-wrap w-full bg-Primary p-4">
                 <div><Link to="/"><img src="/logo.png" alt="logo" /></Link></div>
                 <Search />
                 <CreateEvent />
