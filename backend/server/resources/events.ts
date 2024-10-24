@@ -1,23 +1,30 @@
 import Mongoose from "mongoose";
 import Express from "express";
 
-interface User {
-  id: number;
-  invitedUser: string[];
-  location: string;
-  time: string;
-  description: string;
-  max: number;
-  private: boolean;
-  creatorId: number;
-  name: string;
-  image: string;
-}
-
-const schema = new Mongoose.Schema<User>({
-  name: { type: String, required: true },
-  image: { type: String, required: true },
-});
+interface Event {
+    id: number;
+    invitedUser: string[];
+    location: string;
+    time: string;
+    description: string;
+    max: number;
+    private: boolean;
+    creatorId: number;
+    name: string;
+    image: string;
+  }
+  
+  const schema = new Mongoose.Schema<Event>({
+    name: { type: String, required: true },
+    image: { type: String, required: true },
+    invitedUser: { type: [String], required: false },
+    location: { type: String, required: true },
+    time: { type: String, required: true },
+    description: { type: String, required: true },
+    max: { type: Number, required: true },
+    private: { type: Boolean, required: true },
+    creatorId: { type: Number, required: true }
+  });
 
 const EventModel = Mongoose.model("event", schema);
 
