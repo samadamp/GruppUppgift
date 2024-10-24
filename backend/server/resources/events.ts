@@ -26,29 +26,40 @@ interface Event {
     creatorId: { type: Number, required: true }
   });
 
-const EventModel = Mongoose.model("event", schema);
+  const EventModel = Mongoose.model("event", schema);
 
-export const eventRouter = Express.Router();
-
-eventRouter.get("/", async (req, res) => {
-  const events = await EventModel.find().exec();
-  res.send(events);
-});
-
-eventRouter.get("/:id", async (req, res) => {
-  const events = await EventModel.findById(req.params.id).exec();
-  res.send(events);
-});
-
-eventRouter.post("/", async (req, res) => {
-  const newEvent = new EventModel(req.body);
-
-  try {
-    await newEvent.save();
-    res.send(newEvent);
-  } catch (err) {
-    console.log("Save to database failed");
-    res.status(500);
-    res.send({});
-  }
-});
+  export const eventRouter = Express.Router();
+  
+  
+  eventRouter.get("/", async (req, res) => {
+    const events = await EventModel.find().exec();
+    res.send(events);
+  });
+  
+  
+  eventRouter.get("/:id", async (req, res) => {
+    try {
+      const event = await EventModel.findById(req.params.id).exec();
+      if (event) {
+        res.send(event);
+      } else {
+        res.status(404).send({ message: "Event not found" });
+      }
+    } catch (err) {
+      res.status(500).send({ message: "Error retrieving event" });
+    }
+  });
+  
+  
+  eventRouter.post("/", async (req, res) => {
+    const newEvent = new EventModel(req.body);
+  
+    try {
+      await newEvent.save();
+      res.send(newEvent);
+    } catch (err) {
+      console.log("Save to database failed");
+      res.status(500).send({ message: "Failed to save event" });
+    }
+  });
+  
