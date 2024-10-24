@@ -6,7 +6,8 @@ export const apiRouter = Express.Router();
 
 apiRouter.use(Express.json());
 apiRouter.use((req, res, next) => {
-  Mongoose.connect("mongodb://localhost/");
+    Mongoose.connect("mongodb+srv://94sampan:Bf49PuSE9uZ6sJxK@databas.qtcdf.mongodb.net/myDatabase?retryWrites=true&w=majority");
+
   next();
 });
 
