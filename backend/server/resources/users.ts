@@ -3,20 +3,19 @@ import Express from "express";
 
 interface User {
   id: number;
-  invitedUser: string[];
-  location: string;
-  time: string;
-  description: string;
-  max: number;
-  private: boolean;
-  creatorId: number;
   name: string;
-  image: string;
+  userName: string;
+  age: number;
+  payment: boolean;
+  admin: boolean;
+  email: string;
+  phone: number;
+  event: string[];
+  createdEvents: string[];
 }
 
 const schema = new Mongoose.Schema<User>({
   name: { type: String, required: true },
-  image: { type: String, required: true },
 });
 
 const UserModel = Mongoose.model("user", schema);
