@@ -19,26 +19,26 @@ const schema = new Mongoose.Schema<User>({
   image: { type: String, required: true },
 });
 
-const EventModel = Mongoose.model("event", schema);
+const UserModel = Mongoose.model("user", schema);
 
-export const eventRouter = Express.Router();
+export const userRouter = Express.Router();
 
-eventRouter.get("/", async (req, res) => {
-  const events = await EventModel.find().exec();
-  res.send(events);
+userRouter.get("/", async (req, res) => {
+  const users = await UserModel.find().exec();
+  res.send(users);
 });
 
-eventRouter.get("/:id", async (req, res) => {
-  const events = await EventModel.findById(req.params.id).exec();
-  res.send(events);
+userRouter.get("/:id", async (req, res) => {
+  const users = await UserModel.findById(req.params.id).exec();
+  res.send(users);
 });
 
-eventRouter.post("/", async (req, res) => {
-  const newEvent = new EventModel(req.body);
+userRouter.post("/", async (req, res) => {
+  const newUser = new UserModel(req.body);
 
   try {
-    await newEvent.save();
-    res.send(newEvent);
+    await newUser.save();
+    res.send(newUser);
   } catch (err) {
     console.log("Save to database failed");
     res.status(500);
