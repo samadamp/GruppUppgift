@@ -20,7 +20,6 @@ app.listen(port, () => {
 	console.log("Server is listening on " + port);
 }); */
 
-
 import Mongoose from "mongoose";
 import Express from "express";
 import { apiRouter } from "./api";
@@ -28,11 +27,14 @@ import { apiRouter } from "./api";
 const port = 3000;
 
 // MongoDB Atlas connection string (hardcoded)
-const mongoURI = "mongodb+srv://94sampan:Bf49PuSE9uZ6sJxK@databas.qtcdf.mongodb.net/myDatabase?retryWrites=true&w=majority";
+const mongoURI =
+  "mongodb+srv://94sampan:Bf49PuSE9uZ6sJxK@databas.qtcdf.mongodb.net/Databases?retryWrites=true&w=majority";
 
 const app = Express();
 
 // Connect to MongoDB Atlas once when the app starts
+console.log("Attempting to connect to mongodb..");
+
 Mongoose.connect(mongoURI)
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.error("MongoDB connection error:", err));

@@ -2,7 +2,6 @@ import Mongoose from "mongoose";
 import Express from "express";
 
 interface User {
-  id: number;
   name: string;
   userName: string;
   age: number;
@@ -23,19 +22,17 @@ const schema = new Mongoose.Schema<User>({
   email: { type: String, required: true },
   phone: { type: Number, required: true },
   event: { type: [String], required: false },
-  createdEvents: { type: [String], required: false } 
+  createdEvents: { type: [String], required: false },
 });
 
 const UserModel = Mongoose.model("user", schema);
 
 export const userRouter = Express.Router();
 
-
 userRouter.get("/", async (req, res) => {
   const users = await UserModel.find().exec();
   res.send(users);
 });
-
 
 userRouter.get("/:id", async (req, res) => {
   try {
@@ -49,7 +46,6 @@ userRouter.get("/:id", async (req, res) => {
     res.status(500).send({ message: "Error retrieving user" });
   }
 });
-
 
 userRouter.post("/", async (req, res) => {
   const newUser = new UserModel(req.body);
