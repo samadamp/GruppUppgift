@@ -3,6 +3,7 @@ export type eventCard = {
     title: string,
     desc: string,
     img: string,
+    isPrivate: boolean,
 };
 
 export type eventDetails = {
